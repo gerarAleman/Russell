@@ -22,19 +22,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar Flet
-        run: pip install flet
+      - name: Instalar Flet con herramientas de compilación
+        run: pip install -U "flet[all]"
 
       - name: Compilar APK Paciente
-        # NOTA: Asegúrate de que coincida con el nombre exacto de tu carpeta (ej: appPaciente)
         working-directory: ./appPaciente
-        run: flet build apk --project-name "RussellPaciente" --org "com.russell.paciente"
+        run: flet build apk -v
 
       - name: Subir APK Paciente
         uses: actions/upload-artifact@v4
         with:
           name: Russell-Paciente-APK
-          path: appPaciente/build/apk/*.apk
+          path: appPaciente/build/**/*.apk
 
   build-cuidador:
     name: Compilar App Cuidador
@@ -54,16 +53,15 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar Flet
-        run: pip install flet
+      - name: Instalar Flet con herramientas de compilación
+        run: pip install -U "flet[all]"
 
       - name: Compilar APK Cuidador
-        # NOTA: Asegúrate de que coincida con el nombre exacto de tu carpeta (ej: appCuidador)
         working-directory: ./appCuidador
-        run: flet build apk --project-name "RussellCuidador" --org "com.russell.cuidador"
+        run: flet build apk -v
 
       - name: Subir APK Cuidador
         uses: actions/upload-artifact@v4
         with:
           name: Russell-Cuidador-APK
-          path: appCuidador/build/apk/*.apk
+          path: appCuidador/build/**/*.apk
