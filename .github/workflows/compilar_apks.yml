@@ -22,12 +22,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar Flet con herramientas de compilación
+      - name: Instalar Flet CLI
         run: pip install -U "flet[all]"
 
       - name: Compilar APK Paciente
         working-directory: ./appPaciente
-        run: flet build apk -v
+        # Agregamos --yes para que acepte la descarga de Flutter y licencias automáticamente
+        run: flet build apk -v --yes
 
       - name: Subir APK Paciente
         uses: actions/upload-artifact@v4
@@ -53,12 +54,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar Flet con herramientas de compilación
+      - name: Instalar Flet CLI
         run: pip install -U "flet[all]"
 
       - name: Compilar APK Cuidador
         working-directory: ./appCuidador
-        run: flet build apk -v
+        # Agregamos --yes para que acepte la descarga de Flutter y licencias automáticamente
+        run: flet build apk -v --yes
 
       - name: Subir APK Cuidador
         uses: actions/upload-artifact@v4
