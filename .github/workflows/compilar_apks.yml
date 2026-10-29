@@ -1,0 +1,67 @@
+name: Compilar APKs de Russell
+
+on:
+  workflow_dispatch: # Permite iniciar la compilación con un solo clic
+
+jobs:
+  build-paciente:
+    name: Compilar App Paciente
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instalar Flet
+        run: pip install flet
+
+      - name: Compilar APK Paciente
+        working-directory: ./App_Paciente
+        run: flet build apk --project-name "RussellPaciente" --org "com.russell.paciente"
+
+      - name: Subir APK Paciente
+        uses: actions/upload-artifact@v4
+        with:
+          name: Russell-Paciente-APK
+          path: App_Paciente/build/apk/*.apk
+
+  build-cuidador:
+    name: Compilar App Cuidador
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instalar Flet
+        run: pip install flet
+
+      - name: Compilar APK Cuidador
+        working-directory: ./App_Cuidador
+        run: flet build apk --project-name "RussellCuidador" --org "com.russell.cuidador"
+
+      - name: Subir APK Cuidador
+        uses: actions/upload-artifact@v4
+        with:
+          name: Russell-Cuidador-APK
+          path: App_Cuidador/build/apk/*.apk
