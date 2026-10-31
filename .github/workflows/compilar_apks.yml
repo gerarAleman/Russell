@@ -27,8 +27,8 @@ jobs:
 
       - name: Compilar APK Paciente
         working-directory: ./appPaciente
-        # Agregamos --yes para que acepte la descarga de Flutter y licencias automáticamente
-        run: flet build apk -v --yes
+        # --product define el nombre visible en el teléfono ("Russell")
+        run: flet build apk --product "Russell" --project "russell_paciente" --org "com.russell.paciente" -v --yes
 
       - name: Subir APK Paciente
         uses: actions/upload-artifact@v4
@@ -59,8 +59,8 @@ jobs:
 
       - name: Compilar APK Cuidador
         working-directory: ./appCuidador
-        # Agregamos --yes para que acepte la descarga de Flutter y licencias automáticamente
-        run: flet build apk -v --yes
+        # --product define el nombre visible en el teléfono ("Russell para cuidadores")
+        run: flet build apk --product "Russell para cuidadores" --project "russell_cuidador" --org "com.russell.cuidador" -v --yes
 
       - name: Subir APK Cuidador
         uses: actions/upload-artifact@v4
