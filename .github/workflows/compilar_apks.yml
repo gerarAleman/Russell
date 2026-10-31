@@ -22,12 +22,14 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Aceptar licencias de Android
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
       - name: Instalar Flet CLI
         run: pip install -U "flet[all]"
 
       - name: Compilar APK Paciente
         working-directory: ./appPaciente
-        # --product define el nombre visible en el teléfono ("Russell")
         run: flet build apk --product "Russell" --project "russell_paciente" --org "com.russell.paciente" -v --yes
 
       - name: Subir APK Paciente
@@ -54,12 +56,14 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Aceptar licencias de Android
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
       - name: Instalar Flet CLI
         run: pip install -U "flet[all]"
 
       - name: Compilar APK Cuidador
         working-directory: ./appCuidador
-        # --product define el nombre visible en el teléfono ("Russell para cuidadores")
         run: flet build apk --product "Russell para cuidadores" --project "russell_cuidador" --org "com.russell.cuidador" -v --yes
 
       - name: Subir APK Cuidador
