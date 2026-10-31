@@ -1,4 +1,0 @@
-flet
-supabase
-postgrest
-requests
